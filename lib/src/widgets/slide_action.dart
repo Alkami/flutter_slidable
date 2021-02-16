@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_slidable/src/widgets/slidable.dart';
+
+import 'slidable.dart';
 
 const bool _kCloseOnTap = true;
 
@@ -15,7 +16,7 @@ abstract class ClosableSlideAction extends StatelessWidget {
     this.color,
     this.onTap,
     this.closeOnTap = _kCloseOnTap,
-  })  : assert(closeOnTap != null),
+  })  : assert(closeOnTap != null, 'closeOnTap should not be null'),
         super(key: key);
 
   /// The background color of this action.
@@ -73,8 +74,9 @@ class SlideAction extends ClosableSlideAction {
     Color color,
     Decoration decoration,
     bool closeOnTap = _kCloseOnTap,
-  })  : assert(child != null),
-        assert(decoration == null || decoration.debugAssertIsValid()),
+  })  : assert(child != null, 'child should not be null'),
+        assert(decoration == null || decoration.debugAssertIsValid(),
+            'decoration should be valid'),
         assert(
             color == null || decoration == null,
             'Cannot provide both a color and a decoration\n'
@@ -120,16 +122,16 @@ class IconSlideAction extends ClosableSlideAction {
     this.icon,
     this.iconWidget,
     this.caption,
-    Color color,
+    Color backgroundColor,
     this.foregroundColor,
     VoidCallback onTap,
     bool closeOnTap = _kCloseOnTap,
-  })  : color = color ?? Colors.white,
+  })  : backgroundColor = backgroundColor ?? Colors.white,
         assert(icon != null || iconWidget != null,
             'Either set icon or iconWidget.'),
         super(
           key: key,
-          color: color,
+          color: backgroundColor,
           onTap: onTap,
           closeOnTap: closeOnTap,
         );
@@ -148,7 +150,7 @@ class IconSlideAction extends ClosableSlideAction {
   /// The background color.
   ///
   /// Defaults to [Colors.white].
-  final Color color;
+  final Color backgroundColor;
 
   /// The color used for [icon] and [caption].
   final Color foregroundColor;
@@ -165,7 +167,7 @@ class IconSlideAction extends ClosableSlideAction {
     if (icon != null) {
       widgets.add(
         Flexible(
-          child: new Icon(
+          child: Icon(
             icon,
             color: foregroundColor ?? estimatedColor,
           ),
@@ -194,12 +196,10 @@ class IconSlideAction extends ClosableSlideAction {
       );
     }
 
-    return Container(
-      child: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: widgets,
-        ),
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: widgets,
       ),
     );
   }

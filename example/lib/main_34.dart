@@ -59,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   secondaryActions: <Widget>[
                     IconSlideAction(
                       caption: 'Delete',
-                      color: Colors.red,
+                      backgroundColor: Colors.red,
                       icon: Icons.delete,
                       //onTap: () => removeLocation(location),
                     ),

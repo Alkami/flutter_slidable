@@ -1,7 +1,8 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_slidable/src/widgets/slidable.dart';
 
-const Duration _kResizeDuration = const Duration(milliseconds: 300);
+import 'slidable.dart';
+
+const Duration _kResizeDuration = Duration(milliseconds: 300);
 
 /// A widget that controls how the [Slidable] is dismissed.
 ///
@@ -27,7 +28,8 @@ class SlidableDismissal extends StatelessWidget {
     this.onWillDismiss,
     this.closeOnCanceled = false,
     this.dragDismissible = true,
-  }) : assert(dismissThresholds != null);
+  }) : assert(
+            dismissThresholds != null, 'dismiss thresholds should not be null');
 
   /// Specifies if the widget can be dismissed by sliding.
   ///
@@ -90,7 +92,6 @@ class SlidableDismissal extends StatelessWidget {
 
     return AnimatedBuilder(
       animation: data.overallMoveAnimation,
-      child: child,
       builder: (BuildContext context, Widget child) {
         if (data.overallMoveAnimation.value > data.totalActionsExtent) {
           return child;
@@ -98,6 +99,7 @@ class SlidableDismissal extends StatelessWidget {
           return data.slidable.actionPane;
         }
       },
+      child: child,
     );
   }
 }
@@ -124,7 +126,8 @@ class SlidableDrawerDismissal extends StatelessWidget {
     final extentAnimations = Iterable.generate(count).map((index) {
       return Tween<double>(
         begin: data.actionExtentRatio,
-        end: 1 - data.actionExtentRatio * (data.actionCount - index - 1),
+        end: 1 -
+            data.actionExtentRatio * (data.actionCount - (index as num) - 1),
       ).animate(
         CurvedAnimation(
           parent: data.overallMoveAnimation,
@@ -142,7 +145,7 @@ class SlidableDrawerDismissal extends StatelessWidget {
                 child: Stack(
                   children: List.generate(data.actionCount, (index) {
                     // For the main actions we have to reverse the order if we want the last item at the bottom of the stack.
-                    int displayIndex =
+                    final int displayIndex =
                         data.showActions ? data.actionCount - index - 1 : index;
 
                     return data.createFractionallyAlignedSizedBox(

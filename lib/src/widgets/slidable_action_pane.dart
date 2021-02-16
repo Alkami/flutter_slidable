@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_slidable/src/widgets/slidable.dart';
+
+import 'slidable.dart';
 
 class _SlidableStackActionPane extends StatelessWidget {
   _SlidableStackActionPane({
@@ -35,8 +36,9 @@ class _SlidableStackActionPane extends StatelessWidget {
 }
 
 /// An action pane that creates actions which stretch while the item is sliding.
-class SlidableStrechActionPane extends StatelessWidget {
-  const SlidableStrechActionPane({Key key}) : super(key: key);
+class SlidableStretchActionPane extends StatelessWidget {
+  /// Creates a [SlidableStrechActionPane]
+  const SlidableStretchActionPane({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -74,6 +76,7 @@ class SlidableStrechActionPane extends StatelessWidget {
 
 /// An action pane that creates actions which stay behind the item while it's sliding.
 class SlidableBehindActionPane extends StatelessWidget {
+  /// Creates a [SlidableBehindActionPane]
   const SlidableBehindActionPane({Key key}) : super(key: key);
 
   @override
@@ -152,7 +155,7 @@ class SlidableDrawerActionPane extends StatelessWidget {
     final animations = Iterable.generate(data.actionCount).map((index) {
       return Tween<Offset>(
         begin: startOffset,
-        end: startOffset * (index - data.actionCount + 1.0),
+        end: startOffset * ((index as int) - data.actionCount + 1.0),
       ).animate(data.actionsMoveAnimation);
     }).toList();
 
@@ -164,7 +167,7 @@ class SlidableDrawerActionPane extends StatelessWidget {
           children: List.generate(
             data.actionCount,
             (index) {
-              int displayIndex =
+              final int displayIndex =
                   data.showActions ? data.actionCount - index - 1 : index;
               return SlideTransition(
                 position: animations[index],

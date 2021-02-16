@@ -33,24 +33,24 @@ class MyHomePage extends StatelessWidget {
             actions: <Widget>[
               IconSlideAction(
                 caption: 'Archive',
-                color: Colors.blue,
+                backgroundColor: Colors.blue,
                 icon: Icons.archive,
               ),
               IconSlideAction(
                 caption: 'Share',
-                color: Colors.indigo,
+                backgroundColor: Colors.indigo,
                 icon: Icons.share,
               ),
             ],
             secondaryActions: <Widget>[
               IconSlideAction(
                 caption: 'More',
-                color: Colors.grey.shade200,
+                backgroundColor: Colors.grey.shade200,
                 icon: Icons.more_horiz,
               ),
               IconSlideAction(
                 caption: 'Delete',
-                color: Colors.red,
+                backgroundColor: Colors.red,
                 icon: Icons.delete,
               ),
             ],
