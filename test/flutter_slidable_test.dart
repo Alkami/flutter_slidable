@@ -1,9 +1,9 @@
 import 'package:flutter/gestures.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_slidable/src/widgets/slidable_action_pane.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:test/test.dart' show fail;
+import 'package:flutter/widgets.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 const double itemExtent = 100.0;
 const double actionExtentRatio = 0.2;
@@ -437,7 +437,7 @@ void main() {
   setUp(() {});
 
   // Tests all delegates dragging half of total action extents.
-  testSlidableDelegate(const SlidableStretchActionPane(),
+  testSlidableDelegate(const SlidableStrechActionPane(),
       getSlidableStrechDelegateHalfValues, actionExtentRatio);
   testSlidableDelegate(const SlidableBehindActionPane(),
       getSlidableBehindDelegateHalfValues, actionExtentRatio);
