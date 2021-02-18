@@ -11,7 +11,7 @@ class FractionallyAlignedSizedBox extends StatelessWidget {
   ///
   /// If non-null, the [widthFactor] and [heightFactor] arguments must be
   /// non-negative.
-  const FractionallyAlignedSizedBox({
+  FractionallyAlignedSizedBox({
     Key key,
     @required this.child,
     this.leftFactor,
@@ -20,15 +20,12 @@ class FractionallyAlignedSizedBox extends StatelessWidget {
     this.bottomFactor,
     this.widthFactor,
     this.heightFactor,
-  })  : assert(leftFactor == null || rightFactor == null || widthFactor == null,
-            'horizontal factors should not be null'),
+  })  : assert(
+            leftFactor == null || rightFactor == null || widthFactor == null),
         assert(
-            topFactor == null || bottomFactor == null || heightFactor == null,
-            'vertical factors should not be null'),
-        assert(widthFactor == null || widthFactor >= 0.0,
-            'width factor should be >= 0'),
-        assert(heightFactor == null || heightFactor >= 0.0,
-            'height factor should be >= 0'),
+            topFactor == null || bottomFactor == null || heightFactor == null),
+        assert(widthFactor == null || widthFactor >= 0.0),
+        assert(heightFactor == null || heightFactor >= 0.0),
         super(key: key);
 
   /// The relative distance that the child's left edge is inset from the left of the parent.
@@ -81,7 +78,7 @@ class FractionallyAlignedSizedBox extends StatelessWidget {
     if (widthFactor != null && widthFactor != 1) {
       if (leftFactor != null) {
         dx = leftFactor / (1 - widthFactor);
-      } else if (rightFactor != null) {
+      } else if (leftFactor == null && rightFactor != null) {
         dx = (1 - widthFactor - rightFactor) / (1 - widthFactor);
       }
     }
@@ -89,7 +86,7 @@ class FractionallyAlignedSizedBox extends StatelessWidget {
     if (heightFactor != null && heightFactor != 1) {
       if (topFactor != null) {
         dy = topFactor / (1 - heightFactor);
-      } else if (bottomFactor != null) {
+      } else if (topFactor == null && bottomFactor != null) {
         dy = (1 - heightFactor - bottomFactor) / (1 - heightFactor);
       }
     }

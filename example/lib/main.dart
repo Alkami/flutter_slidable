@@ -136,13 +136,13 @@ class _MyHomePageState extends State<MyHomePage> {
       actions: <Widget>[
         IconSlideAction(
           caption: 'Archive',
-          backgroundColor: Colors.blue,
+          color: Colors.blue,
           icon: Icons.archive,
           onTap: () => _showSnackBar(context, 'Archive'),
         ),
         IconSlideAction(
           caption: 'Share',
-          backgroundColor: Colors.indigo,
+          color: Colors.indigo,
           icon: Icons.share,
           onTap: () => _showSnackBar(context, 'Share'),
         ),
@@ -155,14 +155,14 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         IconSlideAction(
           caption: 'More',
-          backgroundColor: Colors.grey.shade200,
+          color: Colors.grey.shade200,
           icon: Icons.more_horiz,
           onTap: () => _showSnackBar(context, 'More'),
           closeOnTap: false,
         ),
         IconSlideAction(
           caption: 'Delete',
-          backgroundColor: Colors.red,
+          color: Colors.red,
           icon: Icons.delete,
           onTap: () => _showSnackBar(context, 'Delete'),
         ),
@@ -226,7 +226,7 @@ class _MyHomePageState extends State<MyHomePage> {
             if (index == 0) {
               return IconSlideAction(
                 caption: 'Archive',
-                backgroundColor: renderingMode == SlidableRenderingMode.slide
+                color: renderingMode == SlidableRenderingMode.slide
                     ? Colors.blue.withOpacity(animation.value)
                     : (renderingMode == SlidableRenderingMode.dismiss
                         ? Colors.blue
@@ -262,7 +262,7 @@ class _MyHomePageState extends State<MyHomePage> {
             } else {
               return IconSlideAction(
                 caption: 'Share',
-                backgroundColor: renderingMode == SlidableRenderingMode.slide
+                color: renderingMode == SlidableRenderingMode.slide
                     ? Colors.indigo.withOpacity(animation.value)
                     : Colors.indigo,
                 icon: Icons.share,
@@ -276,7 +276,7 @@ class _MyHomePageState extends State<MyHomePage> {
             if (index == 0) {
               return IconSlideAction(
                 caption: 'More',
-                backgroundColor: renderingMode == SlidableRenderingMode.slide
+                color: renderingMode == SlidableRenderingMode.slide
                     ? Colors.grey.shade200.withOpacity(animation.value)
                     : Colors.grey.shade200,
                 icon: Icons.more_horiz,
@@ -286,7 +286,7 @@ class _MyHomePageState extends State<MyHomePage> {
             } else {
               return IconSlideAction(
                 caption: 'Delete',
-                backgroundColor: renderingMode == SlidableRenderingMode.slide
+                color: renderingMode == SlidableRenderingMode.slide
                     ? Colors.red.withOpacity(animation.value)
                     : Colors.red,
                 icon: Icons.delete,
@@ -302,7 +302,7 @@ class _MyHomePageState extends State<MyHomePage> {
       case 0:
         return SlidableBehindActionPane();
       case 1:
-        return SlidableStretchActionPane();
+        return SlidableStrechActionPane();
       case 2:
         return SlidableScrollActionPane();
       case 3:
