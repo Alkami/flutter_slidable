@@ -814,8 +814,6 @@ class SlidableState extends State<Slidable>
     final bool shouldOpen = velocity.sign == _dragExtent.sign;
     final bool fast = velocity.abs() > widget.fastThreshold;
 
-    print(overallMoveAnimation.value);
-    print(widget.showAllActionsThreshold);
     if (_dismissible && overallMoveAnimation.value > _totalActionsExtent) {
       // We are in a dismiss state.
       if (overallMoveAnimation.value >= _dismissThreshold) {
