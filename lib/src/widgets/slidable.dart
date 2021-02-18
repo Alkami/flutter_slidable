@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -774,6 +773,7 @@ class SlidableState extends State<Slidable>
 
     final double delta = details.primaryDelta;
     _dragExtent += delta;
+
     setState(() {
       actionType = _dragExtent.sign >= 0
           ? SlideActionType.primary
@@ -790,30 +790,32 @@ class SlidableState extends State<Slidable>
           _overallMoveController.value = _overallMoveController.value +
               delta * _dragExtent.sign / _overallDragAxisExtent;
         } else {
-          if (_dragExtent.abs() / _overallDragAxisExtent <= 1) {
-            // Calculate friction
-            _overallMoveController.value = (-_totalActionsExtent *
-                        pow(_dragExtent.abs() / _overallDragAxisExtent - 1, 2) +
-                    _totalActionsExtent)
-                .toDouble();
-          } else {
-            _overallMoveController.value = _totalActionsExtent * 1.01;
-          }
+          // Calculate friction
+          double frictionFactor =
+              (_totalActionsExtent - _overallMoveController.value) /
+                  _totalActionsExtent;
+          _overallMoveController.value = _overallMoveController.value +
+              delta *
+                  _dragExtent.sign /
+                  _overallDragAxisExtent *
+                  frictionFactor.clamp(0.6, 1.0);
         }
       }
     });
   }
 
   void _handleDragEnd(DragEndDetails details) {
+    dragUnderway = false;
     if (widget.controller != null && widget.controller.activeState != this) {
       return;
     }
 
-    dragUnderway = false;
     final double velocity = details.primaryVelocity;
     final bool shouldOpen = velocity.sign == _dragExtent.sign;
     final bool fast = velocity.abs() > widget.fastThreshold;
 
+    print(overallMoveAnimation.value);
+    print(widget.showAllActionsThreshold);
     if (_dismissible && overallMoveAnimation.value > _totalActionsExtent) {
       // We are in a dismiss state.
       if (overallMoveAnimation.value >= _dismissThreshold) {
@@ -821,7 +823,7 @@ class SlidableState extends State<Slidable>
       } else {
         open();
       }
-    } else if (_actionsMoveAnimation.value >= widget.showAllActionsThreshold ||
+    } else if (overallMoveAnimation.value >= widget.showAllActionsThreshold ||
         (shouldOpen && fast)) {
       open();
     } else {
